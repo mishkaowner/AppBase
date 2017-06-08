@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatioRelativeLayout">
+        <attr name="ratio_by">
+            <enum name="width" value="1" />
+            <enum name="height" value="2" />
+        </attr>
+        <attr name="multiple_of" format="float" />
+    </declare-styleable>
+    <declare-styleable name="FrameAnimationView">
+        <attr name="ani_src" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="CustomDatePicker">
+        <attr name="custom_divider" format="integer" />
+        <attr name="custom_text_color" format="integer"/>
+    </declare-styleable>
+</resources>
