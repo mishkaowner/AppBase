@@ -82,5 +82,7 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 
+    compile 'com.romandanylyk:pageindicatorview:0.1.2'
+
     testCompile 'junit:junit:4.12'
 }
