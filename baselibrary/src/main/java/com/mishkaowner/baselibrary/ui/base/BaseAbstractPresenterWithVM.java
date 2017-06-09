@@ -9,7 +9,7 @@ import javax.inject.Inject;
  * Created by jhkim on 17. 4. 28.
  */
 
-public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM> extends BaseAbstractPresenter<V>{
+public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends BaseViewModel> extends BaseAbstractPresenter<V>{
     protected VM vm = null;
     @Inject
     SharedDataEditor sharedDataEditor;
