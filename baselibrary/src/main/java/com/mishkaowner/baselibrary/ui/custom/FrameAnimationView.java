@@ -13,10 +13,6 @@ import com.mishkaowner.baselibrary.R;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by jhkim on 17. 4. 28.
- */
-
 public class FrameAnimationView extends LinearLayout {
     private ImageView aniImage = null;
     private Drawable ani_src = null;

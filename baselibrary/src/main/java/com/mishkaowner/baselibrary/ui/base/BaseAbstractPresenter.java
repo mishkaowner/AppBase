@@ -5,10 +5,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by LKPC0008 on 2017-03-20.
- */
-
 public abstract class BaseAbstractPresenter<V extends BaseView> implements BasePresenter {
     protected V view;
     protected CompositeDisposable disposeOnPause, disposeOnDestroy;

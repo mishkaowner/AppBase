@@ -11,9 +11,6 @@ import javax.inject.Named;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by jhkim on 17. 6. 12.
- */
 @Module
 public class SharedDataEditorModule {
     @LibraryScope

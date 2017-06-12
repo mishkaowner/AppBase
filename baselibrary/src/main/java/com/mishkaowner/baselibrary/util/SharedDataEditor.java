@@ -4,10 +4,6 @@ import android.content.SharedPreferences;
 
 import javax.inject.Inject;
 
-/**
- * Created by jhkim on 17. 6. 7.
- */
-
 public class SharedDataEditor {
     private SharedPreferences sharedPreferences;
 

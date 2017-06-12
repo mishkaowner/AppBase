@@ -10,9 +10,6 @@ import javax.inject.Named;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by Oak on 2017-06-08.
- */
 @Module
 public class BaseAppModule {
     private BaseApp app;

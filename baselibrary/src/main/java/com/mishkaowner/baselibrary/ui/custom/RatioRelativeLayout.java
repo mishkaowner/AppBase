@@ -7,10 +7,6 @@ import android.widget.RelativeLayout;
 
 import com.mishkaowner.baselibrary.R;
 
-/**
- * Created by jhkim on 17. 4. 27.
- */
-
 public class RatioRelativeLayout extends RelativeLayout {
     private static final int _WIDTH = 1, _HEIGHT = 2;
     private int ratio_by = 0;

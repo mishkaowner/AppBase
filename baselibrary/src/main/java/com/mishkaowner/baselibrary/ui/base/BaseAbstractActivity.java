@@ -10,10 +10,6 @@ import io.reactivex.ObservableTransformer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by LKPC0008 on 2017-03-20.
- */
-
 public abstract class BaseAbstractActivity extends AppCompatActivity implements BaseView {
     protected static final int NO_LAYOUT = -1234;
     protected CompositeDisposable disposeOnPause, disposeOnDestroy;

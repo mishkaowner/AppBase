@@ -7,9 +7,6 @@ import com.mishkaowner.baselibrary.util.SharedDataEditor;
 
 import dagger.Component;
 
-/**
- * Created by Oak on 2017-06-08.
- */
 @LibraryScope
 @Component(modules = {BaseAppModule.class, SharedDataEditorModule.class})
 public interface BaseAppComponent {

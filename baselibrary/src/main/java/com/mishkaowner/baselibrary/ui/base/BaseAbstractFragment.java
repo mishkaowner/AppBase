@@ -11,10 +11,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 
-/**
- * Created by LKPC0008 on 2017-03-20.
- */
-
 public abstract class BaseAbstractFragment extends Fragment implements BaseView {
     protected static final int NO_LAYOUT = -1234;
     protected CompositeDisposable disposeOnPause, disposeOnDestroy;

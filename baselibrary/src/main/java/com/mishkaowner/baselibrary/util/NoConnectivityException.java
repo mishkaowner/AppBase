@@ -2,10 +2,6 @@ package com.mishkaowner.baselibrary.util;
 
 import java.io.IOException;
 
-/**
- * Created by jhkim on 17. 4. 20.
- */
-
 public class NoConnectivityException extends IOException {
     @Override
     public String getMessage() {

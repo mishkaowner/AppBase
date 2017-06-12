@@ -8,10 +8,6 @@ import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-/**
- * Created by jhkim on 17. 4. 20.
- */
-
 public class ConnectivityInterceptor implements Interceptor {
     private ConnectivityManager cm;
 
