@@ -2,20 +2,15 @@ package com.mishkaowner.appbase.ui.view;
 
 import android.widget.TextView;
 
-import com.mishkaowner.appbase.di.module.MainActivityModule;
-import com.mishkaowner.appbase.MyApp;
 import com.mishkaowner.appbase.R;
-import com.mishkaowner.appbase.ui.presenter.IMainActivityPresenter;
 import com.mishkaowner.baselibrary.ui.base.BaseAbstractActivity;
 import com.mishkaowner.baselibrary.ui.base.BasePresenter;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 
 public class MainActivity extends BaseAbstractActivity implements IMainActivity {
-    @Inject
-    IMainActivityPresenter presenter;
+    /*@Inject
+    IMainActivityPresenter presenter;*/
     @BindView(R.id.rt)
     TextView textView;
 
@@ -26,12 +21,12 @@ public class MainActivity extends BaseAbstractActivity implements IMainActivity 
 
     @Override
     public void inject() {
-        MyApp.get(this).plus(new MainActivityModule(this)).inject(this);
+        //MyApp.get(this).plus(new MainActivityModule(this)).inject(this);
     }
 
     @Override
     public BasePresenter getPresenter() {
-        return presenter;
+        return null;
     }
 
     @Override
