@@ -8,7 +8,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.mishkaowner.baselibrary.R;
+
 import butterknife.ButterKnife;
 
 /**
@@ -21,7 +23,7 @@ public class FrameAnimationView extends LinearLayout {
 
     public FrameAnimationView(Context context) {
         super(context);
-        if(ani_src != null) {
+        if (ani_src != null) {
             startAnim();
         }
     }
@@ -29,7 +31,7 @@ public class FrameAnimationView extends LinearLayout {
     public FrameAnimationView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setAttrs(context, attrs);
-        if(ani_src != null) {
+        if (ani_src != null) {
             startAnim();
         }
     }
@@ -37,17 +39,19 @@ public class FrameAnimationView extends LinearLayout {
     public FrameAnimationView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setAttrs(context, attrs);
-        if(ani_src != null) {
+        if (ani_src != null) {
             startAnim();
         }
     }
 
-    private void startAnim(){
+    private void startAnim() {
         inflate(getContext(), R.layout.view_frame_animation, this);
-        ButterKnife.bind(this);
-        aniImage.setImageDrawable(ani_src);
-        AnimationDrawable animationDrawable = (AnimationDrawable) aniImage.getDrawable();
-        animationDrawable.start();
+        aniImage = ButterKnife.findById(this, R.id.aniImage);
+        if (aniImage != null) {
+            aniImage.setImageDrawable(ani_src);
+            AnimationDrawable animationDrawable = (AnimationDrawable) aniImage.getDrawable();
+            animationDrawable.start();
+        }
     }
 
     public void setAttrs(Context context, AttributeSet attrs) {

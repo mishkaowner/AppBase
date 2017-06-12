@@ -1,4 +1,16 @@
-<resources>
+
+    <com.mishkaowner.baselibrary.ui.custom.RatioRelativeLayout
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        app:multiple_of="1.0"
+        app:ratio_by="width">
+
+        <com.mishkaowner.baselibrary.ui.custom.FrameAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:ani_src="@drawable/ani_loading" />
+    </com.mishkaowner.baselibrary.ui.custom.RatioRelativeLayout><resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">

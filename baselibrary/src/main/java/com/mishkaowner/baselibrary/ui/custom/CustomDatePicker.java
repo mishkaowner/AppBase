@@ -24,7 +24,6 @@ import butterknife.Unbinder;
 public class CustomDatePicker extends DatePicker {
     private Drawable custom_divider = null;
     private int custom_text_color = -1;
-
     private Unbinder unbinder = null;
 
     public CustomDatePicker(Context context) {
