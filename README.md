@@ -41,28 +41,102 @@ Create V (View) first!
 ---
 
 ```sh
-public interface MainView extends BaseView
+public interface IMainActivity extends BaseView
 ```
 
 create an Implementation class for the View interface above
 
 ```sh
-public class MainActivity extends BaseAbstractActivity implements MainView
+public class MainActivity extends BaseAbstractActivity implements IMainActivity
 ```
 
 And create the presenter for the view
 ---
 
 ```sh
-public interface MainPresenter extends BasePresenter
+public interface IMainActivityPresenter extends BasePresenter
 ```
 
 create an Implementation class for the Presenter interface above
 
 ```sh
-public class MainPresenterImpl extends BaseAbstractPresenter<MainView> implements MainPresenter
+public class MainActivityPresenter extends BaseAbstractPresenter<IMainActivity> implements IMainActivityPresenter
 ```
-Once you finished, those classes will ask you to override methods...
+Once you finished... the class will look like this
+```sh
+public class MainActivity extends BaseAbstractActivity implements IMainActivity {
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main; //Just put your base layout resource id here...
+    }
+    @Override
+    public void inject() {
+    }
+    @Override
+    public BasePresenter getPresenter() {
+        return null;
+    }
+}
+```
+```sh
+public class MainActivityPresenter extends BaseAbstractPresenter<IMainActivity> implements IMainActivityPresenter {
+    public MainActivityPresenter(IMainActivity view) {
+        super(view);
+    }
+}
+```
+
+But wait...where is the presenter?
+This is where Dagger2 comes to rescue!
+
+```sh
+public class MainActivity extends BaseAbstractActivity implements IMainActivity {
+    @Inject IMainActivityPresenter presenter;
+    
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main; //Just put your base layout resource id here...
+    }
+    @Override
+    public void inject() {
+        MyApp.inject(this); //inject Presenter
+    }
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter; //HERE 
+    }
+}
+```
+```sh
+public class MainActivityPresenter extends BaseAbstractPresenter<IMainActivity> implements IMainActivityPresenter {
+    @Inject
+    public MainActivityPresenter(IMainActivity view) {
+        super(view);
+    }
+}
+```
+And presenter and view is now interconnected and injected into each other :D
+
+How to start the application? 
+DO NOT OVERRIDE onResume or onCreate in the View!!!
+Everything must start from Presenter.
+Override OnResume or onCreate in the presenter impl class!
+
+```sh
+public class MainActivityPresenter extends BaseAbstractPresenter<IMainActivity> implements IMainActivityPresenter {
+    @Inject
+    public MainActivityPresenter(IMainActivity view) {
+        super(view);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        view.setText("Hello World from Presenter!");
+    }
+}
+```
+There we go!
 
 ### Todos
 
