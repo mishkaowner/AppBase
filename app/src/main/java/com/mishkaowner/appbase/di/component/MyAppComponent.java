@@ -3,8 +3,9 @@ package com.mishkaowner.appbase.di.component;
 import com.mishkaowner.appbase.MyApp;
 import com.mishkaowner.appbase.di.module.MainActivityModule;
 import com.mishkaowner.appbase.di.module.MyAppModule;
-import com.mishkaowner.baselibrary.di.scope.ApplicationScope;
 import com.mishkaowner.baselibrary.di.component.BaseAppComponent;
+import com.mishkaowner.baselibrary.di.scope.ApplicationScope;
+
 import dagger.Component;
 
 /**
