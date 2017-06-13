@@ -1,9 +1,11 @@
 package com.mishkaowner.appbase.di.module;
 
-import com.mishkaowner.appbase.ui.view.IMainActivity;
+import com.mishkaowner.appbase.ui.interactor.FakeDataInteractor;
+import com.mishkaowner.appbase.ui.interactor.IFakeDataInteractor;
 import com.mishkaowner.appbase.ui.presenter.IMainActivityPresenter;
-import com.mishkaowner.appbase.ui.view.MainActivity;
 import com.mishkaowner.appbase.ui.presenter.MainActivityPresenter;
+import com.mishkaowner.appbase.ui.view.IMainActivity;
+import com.mishkaowner.appbase.ui.view.MainActivity;
 import com.mishkaowner.baselibrary.di.scope.ActivityScope;
 
 import dagger.Module;
@@ -36,5 +38,11 @@ public class MainActivityModule {
     @ActivityScope
     IMainActivityPresenter providesPresenter(MainActivityPresenter presenter) {
         return presenter;
+    }
+
+    @Provides
+    @ActivityScope
+    IFakeDataInteractor providesFakeDataInteractor(FakeDataInteractor fakeDataInteractor){
+        return fakeDataInteractor;
     }
 }

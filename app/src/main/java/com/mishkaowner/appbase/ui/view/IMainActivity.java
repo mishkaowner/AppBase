@@ -7,5 +7,13 @@ import com.mishkaowner.baselibrary.ui.base.BaseView;
  */
 
 public interface IMainActivity extends BaseView {
-    void setText(String s);
+    void setViewListeners();
+
+    void setResultText(String data);
+
+    void hideProgress();
+
+    void showProgress();
+
+    void setQueryText(String query);
 }

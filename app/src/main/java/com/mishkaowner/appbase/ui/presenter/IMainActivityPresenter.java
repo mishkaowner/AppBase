@@ -7,4 +7,9 @@ import com.mishkaowner.baselibrary.ui.base.BasePresenter;
  */
 
 public interface IMainActivityPresenter extends BasePresenter {
+    void onRetrieveBtClicked();
+
+    void onSubmitBtClicked();
+
+    void onQueryChanged(String query);
 }

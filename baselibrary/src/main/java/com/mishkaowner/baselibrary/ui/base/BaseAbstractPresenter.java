@@ -1,5 +1,7 @@
 package com.mishkaowner.baselibrary.ui.base;
 
+import io.reactivex.CompletableTransformer;
+import io.reactivex.MaybeTransformer;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -46,6 +48,14 @@ public abstract class BaseAbstractPresenter<V extends BaseView> implements BaseP
     }
 
     public static final <T> ObservableTransformer<T, T> applySchedulers(){
+        return upstream -> upstream.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static final CompletableTransformer applyCompletableSchedulers(){
+        return upstream -> upstream.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static final <T> MaybeTransformer<T, T> applyMaybeSchedulers(){
         return upstream -> upstream.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
