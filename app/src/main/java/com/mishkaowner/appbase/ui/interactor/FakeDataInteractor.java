@@ -1,6 +1,6 @@
 package com.mishkaowner.appbase.ui.interactor;
 
-import com.mishkaowner.baselibrary.util.SharedDataEditor;
+import com.mishkaowner.baselibrary.util.ISharedDataEditor;
 import com.mishkaowner.baselibrary.util.TextCompat;
 
 import javax.inject.Inject;
@@ -14,7 +14,7 @@ import io.reactivex.Maybe;
 public class FakeDataInteractor implements IFakeDataInteractor {
     private static final String KEY = "TEST_KEY";
     @Inject
-    SharedDataEditor sharedDataEditor;
+    ISharedDataEditor sharedDataEditor;
 
     @Inject
     public FakeDataInteractor() {

@@ -86,6 +86,7 @@ dependencies {
     compile ('de.hdodenhof:circleimageview:2.1.0'){
         transitive = true;
     }
+    compile group: 'commons-io', name: 'commons-io', version: '2.0.1'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'

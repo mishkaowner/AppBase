@@ -1,14 +1,16 @@
 package com.mishkaowner.baselibrary.ui.base;
 
 import com.google.gson.Gson;
-import com.mishkaowner.baselibrary.util.SharedDataEditor;
+import com.mishkaowner.baselibrary.util.ISharedDataEditor;
+
 import java.lang.reflect.ParameterizedType;
+
 import javax.inject.Inject;
 
 public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends BaseViewModel> extends BaseAbstractPresenter<V>{
     protected VM vm = null;
     @Inject
-    SharedDataEditor sharedDataEditor;
+    ISharedDataEditor sharedDataEditor;
 
     public BaseAbstractPresenterWithVM(V view) {
         super(view);

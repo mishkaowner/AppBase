@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.mishkaowner.baselibrary.di.scope.LibraryScope;
+import com.mishkaowner.baselibrary.util.ISharedDataEditor;
 import com.mishkaowner.baselibrary.util.SharedDataEditor;
 
 import javax.inject.Named;
@@ -19,10 +20,9 @@ public class SharedDataEditorModule {
         return context.getSharedPreferences("SAINO", Context.MODE_PRIVATE);
     }
 
-
     @Provides
     @LibraryScope
-    SharedDataEditor providesSharedDataEditor(SharedPreferences sharedPreferences){
-        return new SharedDataEditor(sharedPreferences);
+    ISharedDataEditor providesSharedDataEditor(SharedDataEditor sharedDataEditor){
+        return sharedDataEditor;
     }
 }
