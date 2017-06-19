@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
+import io.reactivex.Observable;
 
 /**
  * Created by Oak on 2017-06-14.
@@ -48,6 +49,23 @@ public class FakeDataInteractor implements IFakeDataInteractor {
                 Thread.sleep(1000);//Simulate network delay
                 sharedDataEditor.setData(KEY, query);
                 if (e != null && !e.isDisposed()) {
+                    e.onComplete();
+                }
+            } catch (Exception exception) {
+                if (e != null && !e.isDisposed()) {
+                    e.onError(exception);
+                }
+            }
+        });
+    }
+
+    @Override
+    public Observable<String> getSecureKey() {
+        return Observable.create(e -> {
+            try {
+                Thread.sleep(1000);//Simulate network delay
+                if (e != null && !e.isDisposed()) {
+                    e.onNext("Hello World");
                     e.onComplete();
                 }
             } catch (Exception exception) {

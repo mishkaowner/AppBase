@@ -2,12 +2,15 @@ package com.mishkaowner.baselibrary.ui.base;
 
 import com.google.gson.Gson;
 import com.mishkaowner.baselibrary.util.ISharedDataEditor;
+import com.mishkaowner.baselibrary.util.TextCompat;
 
 import java.lang.reflect.ParameterizedType;
 
 import javax.inject.Inject;
 
-public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends BaseViewModel> extends BaseAbstractPresenter<V>{
+import io.reactivex.Observable;
+
+public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends BaseViewModel> extends BaseAbstractPresenter<V> {
     protected VM vm = null;
     @Inject
     ISharedDataEditor sharedDataEditor;
@@ -24,11 +27,11 @@ public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends
     @Override
     public void onResume() {
         super.onResume();
-        if(vm == null) {
+        if (vm == null) {
             try {
                 Class<VM> vmClass = (Class<VM>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
                 vm = vmClass.newInstance();
-                if(vm != null) {
+                if (vm != null) {
                     onResumeWithFreshVM(vm);
                 }
             } catch (Exception e) {
@@ -40,14 +43,24 @@ public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends
     @Override
     public void onSave() {
         super.onSave();
-        saveData((Class<VM>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1]);
+        String key = getSecureKey().compose(applySchedulers()).blockingFirst();
+        if (!TextCompat.isBlank(key)) {
+            saveSecureData((Class<VM>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1], key);
+        } else {
+            saveData((Class<VM>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1]);
+        }
     }
 
     @Override
     public void onRestore() {
         super.onRestore();
-        vm = loadData((Class<VM>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1]);
-        if(vm != null) {
+        String key = getSecureKey().compose(applySchedulers()).blockingFirst();
+        if (!TextCompat.isBlank(key)) {
+            vm = loadSecureData((Class<VM>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1], key);
+        } else {
+            vm = loadData((Class<VM>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1]);
+        }
+        if (vm != null) {
             onResumeWithRestoredVM(vm);
         }
     }
@@ -56,11 +69,30 @@ public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends
         sharedDataEditor.setData(t.getName(), new Gson().toJson(vm));
     }
 
+    private <T> void saveSecureData(Class<T> t, String password) {
+        sharedDataEditor.setSecureData(t.getName(), new Gson().toJson(vm), password);
+    }
+
     private <T> T loadData(Class<T> t) {
         String data = sharedDataEditor.getData(t.getName());
         return new Gson().fromJson(data, t);
     }
 
+    private <T> T loadSecureData(Class<T> t, String password) {
+        String data = sharedDataEditor.getSecureData(t.getName(), password);
+        return new Gson().fromJson(data, t);
+    }
+
     protected abstract void onResumeWithFreshVM(VM vm);
+
     protected abstract void onResumeWithRestoredVM(VM vm);
+
+    protected Observable<String> getSecureKey() {
+        return Observable.create(e -> {
+            if (e != null && !e.isDisposed()) {
+                e.onNext("");
+                e.onComplete();
+            }
+        });
+    }
 }
