@@ -8,9 +8,8 @@ import java.lang.reflect.ParameterizedType;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-
 public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends BaseViewModel> extends BaseAbstractPresenter<V> {
+    protected static final String NO_SECURITY_KEY = "";
     protected VM vm = null;
     @Inject
     ISharedDataEditor sharedDataEditor;
@@ -43,7 +42,7 @@ public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends
     @Override
     public void onSave() {
         super.onSave();
-        String key = getSecureKey().compose(applySchedulers()).blockingFirst();
+        String key = getSecureKey();
         if (!TextCompat.isBlank(key)) {
             saveSecureData((Class<VM>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1], key);
         } else {
@@ -54,7 +53,7 @@ public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends
     @Override
     public void onRestore() {
         super.onRestore();
-        String key = getSecureKey().compose(applySchedulers()).blockingFirst();
+        String key = getSecureKey();
         if (!TextCompat.isBlank(key)) {
             vm = loadSecureData((Class<VM>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1], key);
         } else {
@@ -87,12 +86,7 @@ public abstract class BaseAbstractPresenterWithVM<V extends BaseView, VM extends
 
     protected abstract void onResumeWithRestoredVM(VM vm);
 
-    protected Observable<String> getSecureKey() {
-        return Observable.create(e -> {
-            if (e != null && !e.isDisposed()) {
-                e.onNext("");
-                e.onComplete();
-            }
-        });
+    protected String getSecureKey() {
+        return NO_SECURITY_KEY;
     }
 }
