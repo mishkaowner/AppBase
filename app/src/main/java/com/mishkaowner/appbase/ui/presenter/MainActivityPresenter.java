@@ -6,6 +6,7 @@ import com.mishkaowner.appbase.ui.interactor.IFakeDataInteractor;
 import com.mishkaowner.appbase.ui.view.IMainActivity;
 import com.mishkaowner.appbase.ui.viewmodel.MainActivityViewModel;
 import com.mishkaowner.baselibrary.ui.base.BaseAbstractPresenterWithVM;
+import com.mishkaowner.baselibrary.util.ICipherUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,9 @@ import javax.inject.Inject;
 public class MainActivityPresenter extends BaseAbstractPresenterWithVM<IMainActivity, MainActivityViewModel> implements IMainActivityPresenter {
     @Inject
     IFakeDataInteractor fakeDataInteractor;
+    @Inject
+    ICipherUtil cipherUtil;
+
     TestViewModel testViewModel;
 
     @Inject
