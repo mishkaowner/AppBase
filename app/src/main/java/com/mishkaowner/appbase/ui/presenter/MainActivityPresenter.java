@@ -12,8 +12,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-
 /**
  * Created by Oak on 2017-06-08.
  */
@@ -104,9 +102,10 @@ public class MainActivityPresenter extends BaseAbstractPresenterWithVM<IMainActi
     }
 
     @Override
-    protected Observable<String> getSecureKey() {
-        return fakeDataInteractor.getSecureKey();
+    protected String getSecureKey() {
+        return fakeDataInteractor.getSecureKey().blockingFirst(NO_SECURITY_KEY);
     }
+
     public class TestViewModel {
         @Expose
         @SerializedName("name")
