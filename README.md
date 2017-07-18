@@ -144,4 +144,4 @@ There we go!
 
 License
 ----
-GPL v3.0
+MIT License
