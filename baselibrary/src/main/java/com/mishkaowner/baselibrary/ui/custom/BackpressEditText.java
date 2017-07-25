@@ -12,9 +12,11 @@ public class BackpressEditText extends AppCompatEditText {
         super(context, attrs);
     }
 
+
     public BackpressEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
 
     public boolean onKeyPreIme(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
