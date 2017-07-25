@@ -2,6 +2,7 @@ package com.mishkaowner.appbase.ui.view;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -36,6 +37,8 @@ public class MainActivity extends BaseAbstractActivity implements IMainActivity 
     View progressView;
     @Inject
     ISharedDataEditor sharedDataEditor;
+    @BindView(R.id.hahalayout)
+    LinearLayout hahalayout;
 
     @Override
     public int getLayoutId() {

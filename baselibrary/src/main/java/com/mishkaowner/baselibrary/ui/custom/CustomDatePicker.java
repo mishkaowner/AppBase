@@ -24,37 +24,30 @@ import butterknife.Unbinder;
 public class CustomDatePicker extends DatePicker {
     private Drawable custom_divider = null;
     private int custom_text_color = -1;
+    //private int custom_text_size = -1;
     private Unbinder unbinder = null;
 
     public CustomDatePicker(Context context) {
         super(context);
-        if (custom_divider != null && custom_text_color != -1) {
-            start();
-        }
+        start();
     }
 
     public CustomDatePicker(Context context, AttributeSet attrs) {
         super(context, attrs);
         setAttrs(context, attrs);
-        if (custom_divider != null && custom_text_color != -1) {
-            start();
-        }
+        start();
     }
 
     public CustomDatePicker(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setAttrs(context, attrs);
-        if(custom_divider != null && custom_text_color != -1) {
-            start();
-        }
+        start();
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        if(custom_divider != null && custom_text_color != -1) {
-            start();
-        }
+        start();
     }
 
     @Override
@@ -77,6 +70,7 @@ public class CustomDatePicker extends DatePicker {
         try {
             custom_divider = ta.getDrawable(R.styleable.CustomDatePicker_custom_divider);
             custom_text_color = ta.getColor(R.styleable.CustomDatePicker_custom_text_color, -1);
+            //custom_text_size = 60;
         } catch (Exception e) {
             System.out.println("Error on attrb");
         } finally {
@@ -93,20 +87,23 @@ public class CustomDatePicker extends DatePicker {
             for (int i = 0; i < llSecond.getChildCount(); i++) {
                 NumberPicker picker = (NumberPicker) llSecond.getChildAt(i); // Numberpickers in llSecond
                 set_numberpicker_text_colour(picker);
-                Field[] pickerFields = NumberPicker.class.getDeclaredFields();
-                for (Field pf : pickerFields) {
-                    if (pf.getName().equals("mSelectionDivider")) {
-                        pf.setAccessible(true);
-                        try {
-                            pf.set(picker, custom_divider);
-                        } catch (IllegalArgumentException e) {
-                            e.printStackTrace();
-                        } catch (Resources.NotFoundException e) {
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
+                //numberPickerTextColor(picker);
+                if (custom_divider != null) {
+                    Field[] pickerFields = NumberPicker.class.getDeclaredFields();
+                    for (Field pf : pickerFields) {
+                        if (pf.getName().equals("mSelectionDivider")) {
+                            pf.setAccessible(true);
+                            try {
+                                pf.set(picker, custom_divider);
+                            } catch (IllegalArgumentException e) {
+                                e.printStackTrace();
+                            } catch (Resources.NotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
@@ -116,21 +113,35 @@ public class CustomDatePicker extends DatePicker {
 
     private void set_numberpicker_text_colour(NumberPicker number_picker) {
         final int count = number_picker.getChildCount();
-        for (int i = 0; i < count; i++) {
-            View child = number_picker.getChildAt(i);
-            if (child instanceof EditText) {
-                try {
-                    Field wheelpaint_field = number_picker.getClass().getDeclaredField("mSelectorWheelPaint");
-                    wheelpaint_field.setAccessible(true);
-                    ((Paint) wheelpaint_field.get(number_picker)).setColor(custom_text_color);
-                    ((EditText) child).setTextColor(custom_text_color);
-                    number_picker.invalidate();
-                } catch (NoSuchFieldException e) {
-                    System.out.println("Errror " + e.getMessage());
-                } catch (IllegalAccessException e) {
-                    System.out.println("Errror " + e.getMessage());
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Errror " + e.getMessage());
+        if (custom_text_color != -1) {
+            for (int i = 0; i < count; i++) {
+                View child = number_picker.getChildAt(i);
+                if (child instanceof EditText) {
+                    try {
+                        Field wheelpaint_field = number_picker.getClass().getDeclaredField("mSelectorWheelPaint");
+                        wheelpaint_field.setAccessible(true);
+                        if (custom_text_color != -1) {
+                            ((Paint) wheelpaint_field.get(number_picker)).setColor(custom_text_color);
+                            ((EditText) child).setTextColor(custom_text_color);
+                        }
+                        /*if(custom_text_size != -1) {
+                            ((Paint) wheelpaint_field.get(number_picker)).setTextSize(custom_text_size);
+                            ((EditText) child).setTextSize(custom_text_size);
+                        }
+
+                        Field wheelpaint_field2 = number_picker.getClass().getDeclaredField("mInputText");
+                        wheelpaint_field2.setAccessible(true);
+                        if(custom_text_size != -1) {
+                            ((Paint) wheelpaint_field2.get(number_picker)).setTextSize(custom_text_size);
+                        }*/
+                        number_picker.invalidate();
+                    } catch (NoSuchFieldException e) {
+                        System.out.println("Errror " + e.getMessage());
+                    } catch (IllegalAccessException e) {
+                        System.out.println("Errror " + e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Errror " + e.getMessage());
+                    }
                 }
             }
         }
