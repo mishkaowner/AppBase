@@ -7,10 +7,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.inject.Inject;
 
-/**
- * Created by jhkim on 17. 7. 5.
- */
-
 public class CipherUtil implements ICipherUtil {
     private static Cipher encCipher = null;
     private static Cipher decCipher = null;

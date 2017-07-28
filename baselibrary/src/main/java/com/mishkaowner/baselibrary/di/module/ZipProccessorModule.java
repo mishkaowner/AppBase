@@ -6,9 +6,6 @@ import com.mishkaowner.baselibrary.util.ZipProccessor;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by jhkim on 17. 6. 14.
- */
 @Module
 public class ZipProccessorModule {
     @Provides

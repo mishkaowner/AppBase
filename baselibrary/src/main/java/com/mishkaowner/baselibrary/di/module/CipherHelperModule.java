@@ -7,9 +7,6 @@ import com.mishkaowner.baselibrary.util.ICipherUtil;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by jhkim on 17. 6. 16.
- */
 @Module
 public class CipherHelperModule {
     @Provides
