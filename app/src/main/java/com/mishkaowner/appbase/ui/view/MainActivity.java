@@ -2,43 +2,30 @@ package com.mishkaowner.appbase.ui.view;
 
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.mishkaowner.appbase.MyApp;
 import com.mishkaowner.appbase.R;
 import com.mishkaowner.appbase.di.module.MainActivityModule;
 import com.mishkaowner.appbase.ui.presenter.IMainActivityPresenter;
 import com.mishkaowner.baselibrary.ui.base.BaseAbstractActivity;
 import com.mishkaowner.baselibrary.ui.base.BasePresenter;
-import com.mishkaowner.baselibrary.util.ISharedDataEditor;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.BindViews;
-import io.reactivex.Observable;
+import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 public class MainActivity extends BaseAbstractActivity implements IMainActivity {
     @Inject
     IMainActivityPresenter presenter;
     @BindView(R.id.queryEdit)
     EditText queryEdit;
-    @BindViews({R.id.retrieveBt, R.id.submitBt})
-    List<View> bts;
     @BindView(R.id.resultTxt)
     TextView resultTxt;
     @BindView(R.id.progressView)
     View progressView;
-    @Inject
-    ISharedDataEditor sharedDataEditor;
-    @BindView(R.id.hahalayout)
-    LinearLayout hahalayout;
 
     @Override
     public int getLayoutId() {
@@ -55,25 +42,19 @@ public class MainActivity extends BaseAbstractActivity implements IMainActivity 
         return presenter;
     }
 
-    @Override
-    public void setViewListeners() {
-        disposeOnPause.add(Observable.fromIterable(bts)
-                .flatMap(v -> RxView.clicks(v).map(o -> v.getId()))
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .subscribe(id -> {
-                    if (id == R.id.retrieveBt) {
-                        presenter.onRetrieveBtClicked();
-                    } else if (id == R.id.submitBt) {
-                        presenter.onSubmitBtClicked();
-                    }
-                }));
+    @OnClick(R.id.retrieveBt)
+    public void onRetrieveBtClicked() {
+        presenter.onRetrieveBtClicked();
+    }
 
-        disposeOnPause.add(RxTextView.textChanges(queryEdit)
-                .map(CharSequence::toString)
-                .subscribe(query -> presenter.onQueryChanged(query)));
+    @OnClick(R.id.submitBt)
+    public void onSubmitBtClicked() {
+        presenter.onSubmitBtClicked();
+    }
 
-
-        test();
+    @OnTextChanged(R.id.queryEdit)
+    public void onQueryChanged(CharSequence charSequence) {
+        presenter.onQueryChanged(charSequence.toString());
     }
 
     @Override
@@ -94,9 +75,5 @@ public class MainActivity extends BaseAbstractActivity implements IMainActivity 
     @Override
     public void setQueryText(String query) {
         queryEdit.setText(query);
-    }
-
-    private void test() {
-
     }
 }

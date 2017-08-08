@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/hahalayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
@@ -12,18 +11,7 @@
         android:paddingLeft="@dimen/_10sdp"
         android:paddingRight="@dimen/_10sdp"
         android:paddingTop="@dimen/_20sdp">
-        <com.mishkaowner.baselibrary.ui.custom.CustomDatePicker
-            android:id="@+id/datePicker"
-            style="@style/NumberPickerText"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/topBar"
-            android:calendarViewShown="false"
-            android:spinnersShown="true"
-            android:datePickerMode="spinner"
-            android:minDate="01/01/1930"
-            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

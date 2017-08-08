@@ -39,7 +39,6 @@ public class MainActivityPresenter extends BaseAbstractPresenterWithVM<IMainActi
     @Override
     public void onResume() {
         super.onResume();
-        view.setViewListeners();
         println("onResume secure " + vm.getTestViewModel().getList().size());
     }
 

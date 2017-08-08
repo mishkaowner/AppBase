@@ -7,8 +7,6 @@ import com.mishkaowner.baselibrary.ui.base.BaseView;
  */
 
 public interface IMainActivity extends BaseView {
-    void setViewListeners();
-
     void setResultText(String data);
 
     void hideProgress();

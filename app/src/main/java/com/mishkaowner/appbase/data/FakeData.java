@@ -8,11 +8,11 @@ public class FakeData extends RealmObject {
     @PrimaryKey
     private long id;
 
+    @Index
     private String title;
 
     private String description;
 
-    @Index
     private String author;
 
     private String imageUrl;

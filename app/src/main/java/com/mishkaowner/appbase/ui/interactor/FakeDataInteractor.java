@@ -28,14 +28,16 @@ public class FakeDataInteractor implements IFakeDataInteractor {
             Realm realm = null;
             try { // I could use try-with-resources here
                 realm = Realm.getDefaultInstance();
-                FakeData fakeData = realm.where(FakeData.class).equalTo("id", 1).findFirst();
-                if (e != null && !e.isDisposed()) {
-                    if (fakeData != null && !TextCompat.isBlank(fakeData.getTitle())) {
-                        e.onSuccess(fakeData.getTitle());
-                    } else {
-                        e.onComplete();
+                realm.executeTransaction(realm1 -> {
+                    FakeData fakeData = realm1.where(FakeData.class).equalTo("id", 1).findFirst();
+                    if (e != null && !e.isDisposed()) {
+                        if (fakeData != null && !TextCompat.isBlank(fakeData.getTitle())) {
+                            e.onSuccess(fakeData.getTitle());
+                        } else {
+                            e.onComplete();
+                        }
                     }
-                }
+                });
             } catch (Exception exception) {
                 if (e != null && !e.isDisposed()) {
                     e.onError(exception);
