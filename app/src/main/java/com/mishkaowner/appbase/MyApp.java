@@ -9,6 +9,9 @@ import com.mishkaowner.baselibrary.BaseApp;
 import com.mishkaowner.baselibrary.di.component.DaggerBaseAppComponent;
 import com.mishkaowner.baselibrary.di.module.BaseAppModule;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 
 /**
  * Created by Oak on 2017-06-08.
@@ -20,6 +23,11 @@ public class MyApp extends BaseApp {
     @Override
     public void onCreate() {
         super.onCreate();
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
         myAppComponent = DaggerMyAppComponent.builder()
                 .baseAppComponent(DaggerBaseAppComponent.builder().baseAppModule(new BaseAppModule(this)).build())
                 .myAppModule(new MyAppModule(this))

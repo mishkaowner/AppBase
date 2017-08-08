@@ -97,7 +97,7 @@ public class MainActivityPresenter extends BaseAbstractPresenterWithVM<IMainActi
                     vm.setQuery("");
                     view.setQueryText(vm.getQuery());
                     view.hideProgress();
-                });
+                }, t -> println(t.toString()));
     }
 
     @Override
