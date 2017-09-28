@@ -144,4 +144,4 @@ There we go!
 
 License
 ----
-MIT License
+LGPL License
